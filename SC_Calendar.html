@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stewardship Collective — Ecosystem Calendar 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600&family=DM+Sans:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sc-deep:#1A2E3B;--sc-dusk:#2A4558;--sc-current:#3D6478;--sc-sky:#5C8FA6;
+    --sc-horizon:#85B4C8;--sc-mist:#B8D4E0;--sc-cloud:#DFF0F5;--sc-breath:#EEF7FA;
+    --sc-snow:#F6FAFB;--sc-clay:#A08060;--sc-wheat:#C9A96E;--sc-sand:#E8D9C0;
+    --sc-pine:#2D5C3E;--sc-fern:#4A7C5E;--sc-moss:#7DAF90;--sc-meadow:#C8E4D2;
+    --sc-ink:#1E2C35;--sc-body:#3A4B55;--sc-muted:#6B7D87;--sc-quiet:#94A8B2;--sc-border:#D8E8EE;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+  body{font-family:'Inter',sans-serif;background:var(--sc-snow);color:var(--sc-body);line-height:1.7;-webkit-font-smoothing:antialiased;}
+  .page-header{background:linear-gradient(168deg,var(--sc-deep) 0%,var(--sc-dusk) 50%,var(--sc-current) 100%);padding:56px 64px 52px;position:relative;overflow:hidden;}
+  .page-header::before{content:'';position:absolute;top:-60px;right:-60px;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(133,180,200,0.15) 0%,transparent 70%);pointer-events:none;}
+  .header-inner{position:relative;z-index:1;max-width:1060px;margin:0 auto;display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:24px;}
+  .header-wordmark{display:flex;flex-direction:column;gap:2px;margin-bottom:18px;}
+  .wordmark-name{font-family:'Lora',serif;font-size:18px;font-weight:400;color:#F6FAFB;letter-spacing:.02em;}
+  .wordmark-sub{font-size:9px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--sc-horizon);}
+  .header-text h1{font-family:'Lora',serif;font-size:clamp(28px,4vw,44px);font-weight:400;color:#F6FAFB;line-height:1.2;letter-spacing:-.01em;margin-bottom:10px;}
+  .header-text h1 em{font-style:italic;color:var(--sc-mist);}
+  .header-text p{font-size:15px;color:var(--sc-horizon);line-height:1.8;max-width:520px;}
+  .live-badge{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:500;color:var(--sc-mist);background:rgba(133,180,200,0.1);border:1px solid rgba(133,180,200,0.22);padding:7px 14px;border-radius:40px;}
+  .live-dot{width:7px;height:7px;border-radius:50%;background:var(--sc-moss);animation:pulse 2s ease-in-out infinite;}
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
+  .toolbar{background:white;border-bottom:1px solid var(--sc-border);position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(26,46,59,.06);}
+  .toolbar-inner{max-width:1060px;margin:0 auto;padding:0 64px;display:flex;align-items:center;gap:0;overflow-x:auto;scrollbar-width:none;}
+  .toolbar-inner::-webkit-scrollbar{display:none;}
+  .month-tabs{display:flex;gap:0;flex:1;overflow-x:auto;scrollbar-width:none;}
+  .month-tabs::-webkit-scrollbar{display:none;}
+  .month-tab{padding:14px 15px;font-size:12px;font-weight:500;color:var(--sc-muted);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .15s;background:none;border-left:none;border-right:none;border-top:none;user-select:none;}
+  .month-tab:hover{color:var(--sc-sky);}
+  .month-tab.active{color:var(--sc-current);border-bottom-color:var(--sc-current);font-weight:600;}
+  .toolbar-sep{width:1px;height:28px;background:var(--sc-border);margin:0 14px;flex-shrink:0;}
+  .filter-group{display:flex;align-items:center;gap:8px;flex-shrink:0;padding:10px 0;}
+  .filter-label{font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--sc-quiet);white-space:nowrap;}
+  .filter-select{font-family:'Inter',sans-serif;font-size:12px;font-weight:500;color:var(--sc-body);background:var(--sc-breath);border:1px solid var(--sc-border);border-radius:6px;padding:6px 26px 6px 10px;cursor:pointer;outline:none;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%2394A8B2'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center;}
+  .main{max-width:1060px;margin:0 auto;padding:40px 64px 80px;}
+  .month-block{margin-bottom:52px;}
+  .month-heading{display:flex;align-items:baseline;gap:16px;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--sc-border);}
+  .month-heading h2{font-family:'Lora',serif;font-size:26px;font-weight:400;color:var(--sc-ink);letter-spacing:-.01em;}
+  .month-count{font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--sc-quiet);}
+  .events-list{display:flex;flex-direction:column;gap:10px;}
+  .event-card{display:grid;grid-template-columns:72px 1fr auto;background:white;border:1px solid var(--sc-border);border-radius:12px;overflow:hidden;transition:box-shadow .15s,border-color .15s;}
+  .event-card:hover{box-shadow:0 4px 20px rgba(26,46,59,.08);border-color:var(--sc-mist);}
+  .event-date-col{padding:20px 0;display:flex;flex-direction:column;align-items:center;justify-content:center;border-right:1px solid var(--sc-border);background:var(--sc-breath);}
+  .event-day-num{font-family:'Lora',serif;font-size:26px;font-weight:400;color:var(--sc-current);line-height:1;margin-bottom:4px;}
+  .event-day-name{font-size:9px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--sc-quiet);}
+  .event-body{padding:16px 22px;display:flex;flex-direction:column;gap:5px;min-width:0;}
+  .event-name{font-family:'Lora',serif;font-size:16px;font-weight:500;color:var(--sc-ink);line-height:1.35;}
+  .event-meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;}
+  .event-tag{display:inline-block;font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;padding:3px 10px;border-radius:3px;}
+  .region-sg{background:rgba(92,143,166,.1);color:var(--sc-current);}
+  .region-hk{background:rgba(201,169,110,.12);color:#7A6030;}
+  .region-my{background:rgba(74,124,94,.1);color:var(--sc-fern);}
+  .region-us{background:rgba(92,143,166,.08);color:var(--sc-dusk);}
+  .region-other{background:rgba(148,168,178,.1);color:var(--sc-muted);}
+  .event-org{font-size:12px;font-weight:500;color:var(--sc-sky);}
+  .event-type-label{font-size:11px;color:var(--sc-quiet);}
+  .event-venue{font-family:'DM Sans',sans-serif;font-size:12.5px;font-style:italic;color:var(--sc-quiet);}
+  .event-remarks{font-size:13px;color:var(--sc-muted);line-height:1.6;}
+  .event-actions{padding:16px 20px;display:flex;flex-direction:column;align-items:flex-end;justify-content:center;gap:8px;flex-shrink:0;}
+  .event-status{font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;padding:4px 10px;border-radius:3px;}
+  .status-confirmed{background:var(--sc-meadow);color:var(--sc-pine);}
+  .status-tentative{background:var(--sc-sand);color:var(--sc-clay);}
+  .status-cancelled{background:#F5E8E8;color:#8B3A3A;}
+  .event-link{font-size:12px;font-weight:500;color:var(--sc-sky);text-decoration:none;display:flex;align-items:center;gap:4px;white-space:nowrap;}
+  .event-link:hover{color:var(--sc-current);}
+  .event-link::after{content:'→';font-size:11px;}
+  .empty-month{padding:32px 24px;text-align:center;background:var(--sc-breath);border:1px dashed var(--sc-border);border-radius:12px;color:var(--sc-quiet);font-size:14px;font-style:italic;font-family:'DM Sans',sans-serif;}
+  .setup-banner{background:var(--sc-deep);border-radius:14px;padding:32px 36px;margin-bottom:40px;display:flex;gap:28px;align-items:flex-start;}
+  .setup-icon{font-size:26px;flex-shrink:0;margin-top:2px;}
+  .setup-banner h3{font-family:'Lora',serif;font-size:18px;font-weight:500;color:#F6FAFB;margin-bottom:8px;}
+  .setup-banner p{font-size:14px;color:var(--sc-horizon);line-height:1.75;margin-bottom:10px;}
+  .setup-banner code{display:block;background:rgba(133,180,200,.1);border:1px solid rgba(133,180,200,.2);border-radius:6px;padding:10px 14px;font-family:'DM Sans',monospace;font-size:12.5px;color:var(--sc-mist);word-break:break-all;line-height:1.7;margin-top:6px;}
+  #loading-state{text-align:center;padding:64px 0;color:var(--sc-quiet);font-size:14px;font-family:'DM Sans',sans-serif;font-style:italic;}
+  .loader{width:32px;height:32px;border:2px solid var(--sc-border);border-top-color:var(--sc-sky);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 16px;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+  .page-footer{background:var(--sc-deep);border-top:1px solid rgba(133,180,200,.1);padding:36px 64px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
+  .footer-wm-name{font-family:'Lora',serif;font-size:18px;font-weight:400;color:#F6FAFB;}
+  .footer-wm-sub{font-size:9px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--sc-horizon);margin-top:2px;display:block;}
+  .footer-note{font-size:12px;color:var(--sc-muted);text-align:right;line-height:1.7;}
+  @media(max-width:800px){
+    .page-header{padding:36px 20px 32px;}.header-inner{flex-direction:column;align-items:flex-start;}
+    .toolbar-inner{padding:0 16px;}.main{padding:24px 16px 60px;}
+    .event-card{grid-template-columns:58px 1fr;}.event-actions{display:none;}
+    .setup-banner{flex-direction:column;gap:14px;padding:24px 20px;}
+    .page-footer{padding:28px 20px;flex-direction:column;}.footer-note{text-align:left;}
+  }
+</style>
+</head>
+<body>
+
+<header class="page-header">
+  <div class="header-inner">
+    <div>
+      <div class="header-wordmark">
+        <span class="wordmark-name">Stewardship</span>
+        <span class="wordmark-sub">Collective</span>
+      </div>
+      <div class="header-text">
+        <h1>Stewardship Ecosystem<br><em>Joint Calendar 2026</em></h1>
+        <p>A shared view of conferences, convenings, and stewardship events across Singapore, Southeast Asia, and beyond.</p>
+      </div>
+    </div>
+    <div>
+      <div class="live-badge"><span class="live-dot"></span>Updates from Google Sheets</div>
+    </div>
+  </div>
+</header>
+
+<nav class="toolbar">
+  <div class="toolbar-inner">
+    <div class="month-tabs" id="month-tabs"></div>
+    <div class="toolbar-sep"></div>
+    <div class="filter-group">
+      <span class="filter-label">Region</span>
+      <select class="filter-select" id="filter-region" onchange="applyFilters()">
+        <option value="">All</option>
+        <option value="Singapore">Singapore</option>
+        <option value="Hong Kong">Hong Kong</option>
+        <option value="Malaysia">Malaysia</option>
+        <option value="USA">USA</option>
+        <option value="London">London</option>
+        <option value="Global">Global</option>
+      </select>
+    </div>
+    <div class="filter-group" style="margin-left:10px;">
+      <span class="filter-label">Type</span>
+      <select class="filter-select" id="filter-type" onchange="applyFilters()">
+        <option value="">All</option>
+        <option value="Conference">Conference</option>
+        <option value="Workshop">Workshop</option>
+        <option value="Networking">Networking</option>
+        <option value="Forum">Forum</option>
+        <option value="Summit">Summit</option>
+        <option value="Circle">Circle</option>
+        <option value="Retreat">Retreat</option>
+      </select>
+    </div>
+  </div>
+</nav>
+
+<main class="main">
+  <div class="setup-banner" id="setup-banner" style="display:none;">
+    <div class="setup-icon">📋</div>
+    <div>
+      <h3>Connect your Google Sheet to make this calendar live</h3>
+      <p>Currently showing built-in data. To connect Google Sheets so updates appear automatically:</p>
+      <p><strong style="color:#F6FAFB;">1.</strong> Google Sheets → File → Share → Publish to web → "Events" sheet → CSV → Publish → copy the URL.<br>
+      <strong style="color:#F6FAFB;">2.</strong> Open this HTML file, find the line below, and paste your URL between the quotes:</p>
+      <code>const GOOGLE_SHEET_CSV_URL = '<span style="color:var(--sc-wheat);">PASTE-YOUR-PUBLISHED-CSV-URL-HERE</span>';</code>
+      <p style="margin-top:10px;"><strong style="color:#F6FAFB;">3.</strong> Save and re-upload to Netlify. All future updates happen in Google Sheets only — no code changes needed.</p>
+    </div>
+  </div>
+  <div id="loading-state"><div class="loader"></div>Loading calendar…</div>
+  <div id="calendar-content"></div>
+</main>
+
+<footer class="page-footer">
+  <div>
+    <div class="footer-wm-name">Stewardship</div>
+    <span class="footer-wm-sub">Collective</span>
+  </div>
+  <div class="footer-note">Singapore · Ecosystem Calendar 2026<br>darrellong92@gmail.com</div>
+</footer>
+
+<script>
+// ── CONFIGURATION ──────────────────────────────────────────────
+// Paste your published Google Sheets CSV URL here after setup:
+const GOOGLE_SHEET_CSV_URL = '';
+// Example: 'https://docs.google.com/spreadsheets/d/e/XXXX/pub?gid=0&single=true&output=csv'
+
+// ── FALLBACK DATA (from your Excel) ───────────────────────────
+const FALLBACK = [
+  {date:'2026-03-24',name:'Global Investors Symposium',org:'',type:'Conference',region:'Hong Kong',venue:'Hong Kong',remarks:'',link:'',status:'Confirmed'},
+  {date:'2026-03-26',name:'Wealth For Good',org:'',type:'Conference',region:'Hong Kong',venue:'Hong Kong',remarks:'',link:'',status:'Confirmed'},
+  {date:'2026-03-27',name:'Art Basel Hong Kong',org:'',type:'Forum',region:'Hong Kong',venue:'Hong Kong, 27–29 Mar',remarks:'',link:'',status:'Confirmed'},
+  {date:'2026-03-28',name:'One Earth Summit',org:'',type:'Summit',region:'Hong Kong',venue:'Hong Kong',remarks:'',link:'',status:'Confirmed'},
+  {date:'2026-04-11',name:'Journey of Generosity',org:'Journey of Generosity',type:'Workshop',region:'Singapore',venue:'Singapore',remarks:'',link:'',status:'Tentative'},
+  {date:'2026-04-14',name:'HSBC Global Investment Summit — Wealth',org:'HSBC',type:'Summit',region:'Hong Kong',venue:'Hong Kong, 14–16 Apr',remarks:'',link:'',status:'Confirmed'},
+  {date:'2026-04-17',name:'Rugby Sevens Hong Kong',org:'',type:'Networking',region:'Hong Kong',venue:'Hong Kong, 17–19 Apr',remarks:'',link:'',status:'Confirmed'},
+  {date:'2026-04-24',name:'Journey of Generosity',org:'Journey of Generosity',type:'Workshop',region:'Singapore',venue:'Singapore',remarks:'',link:'',status:'Tentative'},
+  {date:'2026-05-03',name:'Milken Global Conference',org:'Milken Institute',type:'Conference',region:'USA',venue:'Los Angeles, 3–6 May',remarks:'',link:'',status:'Confirmed'},
+  {date:'2026-05-04',name:'Alpha Leadership Conference',org:'',type:'Conference',region:'London',venue:'London, 4–5 May',remarks:'',link:'',status:'Confirmed'},
+  {date:'2026-06-03',name:'Sustainable Finance Initiative',org:'',type:'Forum',region:'Hong Kong',venue:'Hong Kong',remarks:'Regional family office focused',link:'',status:'Confirmed'},
+  {date:'2026-07-04',name:'Alpha Marketplace',org:'',type:'Networking',region:'Singapore',venue:'Singapore',remarks:'',link:'',status:'Confirmed'},
+  {date:'2026-07-11',name:'Journey of Generosity',org:'Journey of Generosity',type:'Workshop',region:'Singapore',venue:'Singapore',remarks:'',link:'',status:'Confirmed'},
+  {date:'2026-07-19',name:'Christian Economic Forum',org:'',type:'Forum',region:'USA',venue:'USA, 19–22 Jul',remarks:'',link:'',status:'Confirmed'},
+  {date:'2026-07-30',name:'APAC Redemptive Business Summit',org:'',type:'Summit',region:'Singapore',venue:'Singapore, 30–31 Jul',remarks:'',link:'',status:'Confirmed'},
+  {date:'2026-08-20',name:'Justice Conference Asia',org:'',type:'Conference',region:'Malaysia',venue:'Malaysia',remarks:'',link:'',status:'Confirmed'},
+  {date:'2026-08-25',name:'AVPN Philanthropy Forum',org:'AVPN',type:'Forum',region:'Hong Kong',venue:'Hong Kong, 25–27 Aug',remarks:'',link:'',status:'Confirmed'},
+  {date:'2026-08-28',name:'Journey of Generosity',org:'Journey of Generosity',type:'Workshop',region:'Singapore',venue:'Singapore',remarks:'',link:'',status:'Confirmed'},
+  {date:'2026-09-04',name:'IDMC Conference',org:'',type:'Conference',region:'Singapore',venue:'Singapore, 4–5 Sep',remarks:'',link:'',status:'Confirmed'},
+];
+
+const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const DAYS   = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+let allEvents = [], activeMonth = null;
+
+function parseCSV(text) {
+  const lines = text.trim().split('\n');
+  if (lines.length < 2) return [];
+  const headers = lines[0].split(',').map(h => h.trim().replace(/"/g,''));
+  return lines.slice(1).map(line => {
+    const cols = []; let cur = '', inQ = false;
+    for (let ch of line) {
+      if (ch==='"') inQ=!inQ;
+      else if (ch===',' && !inQ) { cols.push(cur.trim()); cur=''; }
+      else cur+=ch;
+    }
+    cols.push(cur.trim());
+    const o = {}; headers.forEach((h,i)=>{ o[h]=(cols[i]||'').replace(/^"|"$/g,''); });
+    return {date:o['Date']||'',name:o['Event Name']||'',org:o['Organisation']||'',type:o['Type']||'',region:o['Region']||'',venue:o['Venue / Time']||'',remarks:o['Remarks']||'',link:o['Registration Link']||'',status:o['Status']||'Confirmed'};
+  }).filter(e=>e.date&&e.name);
+}
+
+function regionClass(r) {
+  const v=(r||'').toLowerCase();
+  if(v.includes('singapore')) return 'region-sg';
+  if(v.includes('hong kong')||v.includes('hk')) return 'region-hk';
+  if(v.includes('malaysia')||v.includes('my')) return 'region-my';
+  if(v.includes('usa')||v.includes('london')||v.includes('uk')) return 'region-us';
+  return 'region-other';
+}
+
+function buildTabs(months) {
+  const c = document.getElementById('month-tabs'); c.innerHTML='';
+  const all = document.createElement('button');
+  all.className='month-tab'+(activeMonth===null?' active':'');
+  all.textContent='All'; all.onclick=()=>{activeMonth=null;buildTabs(months);renderCalendar();};
+  c.appendChild(all);
+  months.forEach(m=>{
+    const btn=document.createElement('button');
+    btn.className='month-tab'+(activeMonth===m?' active':'');
+    btn.textContent=MONTHS[m];
+    btn.onclick=()=>{activeMonth=m;buildTabs(months);renderCalendar();setTimeout(()=>{const el=document.getElementById('month-'+m);if(el)el.scrollIntoView({behavior:'smooth',block:'start'});},50);};
+    c.appendChild(btn);
+  });
+}
+
+function renderCalendar() {
+  const rf=document.getElementById('filter-region').value;
+  const tf=document.getElementById('filter-type').value;
+  let evs=allEvents.filter(e=>{
+    if(e.status==='Cancelled') return false;
+    if(rf&&!e.region.includes(rf)) return false;
+    if(tf&&e.type!==tf) return false;
+    return true;
+  });
+  const byMonth={};
+  evs.forEach(e=>{
+    const d=new Date(e.date+'T00:00:00'); if(isNaN(d)) return;
+    const m=d.getMonth();
+    if(activeMonth!==null&&m!==activeMonth) return;
+    if(!byMonth[m]) byMonth[m]=[];
+    byMonth[m].push({...e,_d:d});
+  });
+  const months=Object.keys(byMonth).map(Number).sort((a,b)=>a-b);
+  buildTabs(months);
+  const cnt=document.getElementById('calendar-content');
+  if(!months.length){cnt.innerHTML='<div class="empty-month">No events match the current filters.</div>';return;}
+  cnt.innerHTML=months.map(m=>{
+    const sorted=byMonth[m].sort((a,b)=>a._d-b._d);
+    const cards=sorted.map(e=>{
+      const dn=e._d.getDate(), dy=DAYS[e._d.getDay()], rc=regionClass(e.region);
+      return `<div class="event-card">
+        <div class="event-date-col"><div class="event-day-num">${dn}</div><div class="event-day-name">${dy}</div></div>
+        <div class="event-body">
+          <div class="event-name">${e.name}</div>
+          <div class="event-meta">
+            ${e.region?`<span class="event-tag ${rc}">${e.region}</span>`:''}
+            ${e.org?`<span class="event-org">${e.org}</span>`:''}
+            ${e.type?`<span class="event-type-label">${e.type}</span>`:''}
+          </div>
+          ${e.venue?`<div class="event-venue">${e.venue}</div>`:''}
+          ${e.remarks?`<div class="event-remarks">${e.remarks}</div>`:''}
+        </div>
+        <div class="event-actions">
+          <span class="event-status status-${(e.status||'confirmed').toLowerCase()}">${e.status||'Confirmed'}</span>
+          ${e.link?`<a class="event-link" href="${e.link}" target="_blank" rel="noopener">Register</a>`:''}
+        </div>
+      </div>`;
+    }).join('');
+    return `<div class="month-block" id="month-${m}"><div class="month-heading"><h2>${MONTHS[m]} 2026</h2><span class="month-count">${sorted.length} event${sorted.length!==1?'s':''}</span></div><div class="events-list">${cards}</div></div>`;
+  }).join('');
+}
+
+function applyFilters(){activeMonth=null;renderCalendar();}
+
+async function init(){
+  document.getElementById('loading-state').style.display='block';
+  if(GOOGLE_SHEET_CSV_URL){
+    try{const r=await fetch(GOOGLE_SHEET_CSV_URL);allEvents=parseCSV(await r.text());}
+    catch(e){console.warn('Sheet load failed, using fallback.');allEvents=FALLBACK;}
+  } else {
+    document.getElementById('setup-banner').style.display='flex';
+    allEvents=FALLBACK;
+  }
+  document.getElementById('loading-state').style.display='none';
+  activeMonth=null; renderCalendar();
+}
+init();
+</script>
+</body>
+</html>
